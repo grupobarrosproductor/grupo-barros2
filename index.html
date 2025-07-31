@@ -1,0 +1,871 @@
+﻿```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupo Barros - Productores de Seguros</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #005b96;
+            --secondary: #03396c;
+            --accent: #0077cc;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--white);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+        }
+        
+        .logo-text {
+            margin-left: 10px;
+        }
+        
+        .logo-text h1 {
+            color: var(--primary);
+            font-size: 22px;
+            font-weight: 700;
+        }
+        
+        .logo-text p {
+            color: var(--dark);
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--primary);
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 91, 150, 0.8), rgba(0, 91, 150, 0.8)), url('https://plus.unsplash.com/premium_photo-1663013035940-15957e859e62?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZXF1aXBvJTIwZGUlMjB0cmFiYWpvfGVufDB8fDB8fHww') center/cover no-repeat;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--white);
+            color: var(--primary);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid var(--white);
+        }
+        
+        .btn:hover {
+            background-color: transparent;
+            color: var(--white);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--white);
+        }
+        
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h3 {
+            font-size: 28px;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        .about-image {
+            flex: 1;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .service-card:hover .service-img img {
+            transform: scale(1.1);
+        }
+        
+        .service-content {
+            padding: 25px;
+        }
+        
+        .service-content h3 {
+            font-size: 22px;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+        
+        .service-content p {
+            color: #555;
+            margin-bottom: 20px;
+        }
+        
+        .service-btn {
+            display: inline-block;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .service-btn:hover {
+            color: var(--accent);
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+        
+        .contact-container {
+            display: flex;
+            gap: 50px;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-info h3 {
+            font-size: 28px;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        .contact-info p {
+            margin-bottom: 30px;
+            color: #555;
+        }
+        
+        .contact-details {
+            margin-bottom: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .contact-item i {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .contact-form {
+            flex: 1;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--secondary);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 50px 0 20px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-col h4 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 50px;
+            height: 2px;
+            background-color: var(--white);
+        }
+        
+        .footer-col p {
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--white);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .social-links i {
+            font-size: 18px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-content,
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .about-image,
+            .about-text,
+            .contact-info,
+            .contact-form {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                padding: 20px 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav ul.show {
+                display: block;
+            }
+            
+            nav ul li {
+                margin: 0;
+                text-align: center;
+                padding: 10px 0;
+                border-bottom: 1px solid #eee;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 30px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .section-title h2 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="https://i.imgur.com/9k26hgG.jpeg" alt="Logo Grupo Barros Productores de Seguros - Escudo corporativo en azul y blanco">
+                <div class="logo-text">
+                    <h1>Grupo Barros</h1>
+                    <p>Productores de Seguros</p>
+                </div>
+            </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Proteccion a tu medida</h1>
+                <p>Soluciones de seguros personalizadas para proteger lo que mas valoras</p>
+                <a href="#contacto" class="btn btn-primary">Contactar</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="nosotros">
+        <div class="container">
+            <div class="section-title">
+                <h2>Sobre Nosotros</h2>
+                <p>Grupo Barros es una empresa lider en produccion de seguros con mas de 40 años de experiencia en el mercado.</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Nuestra Vision</h3>
+                    <p>Somos un equipo comprometidos con ofrecer las mejores soluciones en seguros, brindando asesoramiento personalizado y atencion de excelencia.</p>
+                    <p>Nuestro objetivo es proteger tus activos y patrimonio con productos de alta calidad, adaptados a tus necesidades especificas.</p>
+                    <p>Trabajamos con las compañias aseguradoras mas solidas del mercado, garantizando la tranquilidad y seguridad que mereces.</p>
+                    <a href="#contacto" class="btn">Saber mas</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://media.istockphoto.com/id/1827291486/es/foto/un-mentor-dedicado-explica-la-importancia-del-proyecto-a-los-aprendices-mientras-est%C3%A1n.jpg?s=1024x1024&w=is&k=20&c=3mmLOQamZ7Vf40-1tIeaP0_HPQ_aImwtojfiAP_YiUM=" alt="Equipo profesional de Grupo Barros reunido en oficina moderna con computadoras y documentos">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="servicios">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestros Servicios</h2>
+                <p>Ofrecemos una amplia gama de productos para cubrir todas tus necesidades de proteccion.</p>
+            </div>
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://previews.123rf.com/images/kadmy/kadmy2302/kadmy230200078/199020435-row-of-used-cars-rental-or-automobile-sale-services.jpg" alt="Seguro de auto - Varios autos modernos aparcados en fila con fondo borroso">
+                    </div>
+                    <div class="service-content">
+                        <h3>Seguros de Automoviles</h3>
+                        <p>Coberturas completas para proteger tu vehiculo contra robo, daños y responsabilidad civil.</p>
+                        <a href="#contacto" class="service-btn">Consultar <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://previews.123rf.com/images/patrykkosmider/patrykkosmider2006/patrykkosmider200600341/150230789-a-modern-single-family-house-with-a-garden-at-sunset.jpg" alt="Seguro de hogar - Casa moderna con jardin durante el atardecer">
+                    </div>
+                    <div class="service-content">
+                        <h3>Seguros de Hogar</h3>
+                        <p>Proteccion integral para tu vivienda y contenidos contra incendio, robo y eventos climaticos.</p>
+                        <a href="#contacto" class="service-btn">Consultar <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://media.istockphoto.com/id/1324653833/es/foto/padres-felices-divirti%C3%A9ndose-mientras-se-aprovechan-de-sus-hijos-peque%C3%B1os-en-la-naturaleza.jpg?s=612x612&w=0&k=20&c=8MJN2pg4c9_kLL31K4zbVWUWD5HjWU2XNv8GreggXTA=" alt="Seguro de vida - Familia feliz abrazandose en el parque">
+                    </div>
+                    <div class="service-content">
+                        <h3>Seguros de Vida</h3>
+                        <p>Planes de proteccion para garantizar el futuro economico de tu familia en cualquier circunstancia.</p>
+                        <a href="#contacto" class="service-btn">Consultar <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://thumbs.dreamstime.com/b/trabajadores-de-empresas-muy-ocupados-trabajando-en-sus-proyectos-una-oficina-moderna-su-empresa-grupos-empresarios-que-trabajan-227484229.jpg" alt="Seguro empresarial - Oficina moderna con empleados trabajando">
+                    </div>
+                    <div class="service-content">
+                        <h3>Seguros Empresariales</h3>
+                        <p>Soluciones a medida para proteger tu negocio, empleados y responsabilidades patrimoniales.</p>
+                        <a href="#contacto" class="service-btn">Consultar <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://media.istockphoto.com/id/2156914006/es/foto/chequeo-hombre-y-m%C3%A9dico-en-consultorio-con-estetoscopio-ayuda-o-asesoramiento-en-seguros-de.jpg?s=612x612&w=0&k=20&c=wMzJ52aNC70pnVhIvzS-J7UFHFSs1tZEJn4l1_M5H4k=" alt="Seguro de salud - Medico revisando a paciente con estetoscopio">
+                    </div>
+                    <div class="service-content">
+                        <h3>Seguros de Salud</h3>
+                        <p>Coberturas medicas de alta calidad con amplias redes de prestadores y beneficios adicionales.</p>
+                        <a href="#contacto" class="service-btn">Consultar <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://media.istockphoto.com/id/1400564019/es/foto/carpinteros-dise%C3%B1ando-en-tienda.jpg?s=612x612&w=0&k=20&c=AKQKxulFtX_2y0NIjsWWpDYbYd0hw7VyNKOaH6fvInY=" alt="Seguro para PYMES - Pequeño negocio con dueño atendiendo a cliente">
+                    </div>
+                    <div class="service-content">
+                        <h3>Seguros para PYMES</h3>
+                        <p>Protecciones especificas para pequeños y medianos negocios a precios competitivos.</p>
+                        <a href="#contacto" class="service-btn">Consultar <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contacto">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contacto</h2>
+                <p>Contactanos para recibir asesoramiento personalizado sobre el seguro que necesitas.</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Informacion de contacto</h3>
+                    <p>Estamos disponibles para responder todas tus consultas y asesorarte en la mejor solucion para tus necesidades.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Direccion:</strong>
+                                <p>Av. Frias 599,Lomas De Zamora, Buenos Aires</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <div>
+                                <strong>Telefono:</strong>
+<p><a href="https://wa.me/541178482784" target="_blank">+54 11 7848-2784</a></p>
+<p> </p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <strong>Email:</strong>
+                                <p>orgfriasseguros@fibertel.com.ar</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nombre completo</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Telefono</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Servicio de interes</label>
+                            <select id="service" name="service" required>
+                                <option value="">Seleccionar servicio</option>
+                                <option value="auto">Seguros de Automoviles</option>
+                                <option value="hogar">Seguros de Hogar</option>
+                                <option value="vida">Seguros de Vida</option>
+                                <option value="empresa">Seguros Empresariales</option>
+                                <option value="salud">Seguros de Salud</option>
+                                <option value="pymes">Seguros para PYMES</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensaje</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Enviar consulta</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4>Grupo Barros</h4>
+                    <p>Grupo barros esta comprometido con tu seguridad y tranquilidad.</p>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-certificate"></i> Certificaciones</a></li>
+                        <li><a href="#"><i class="fas fa-shield-alt"></i> Aseguradoras</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Servicios</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Seguros Personales</a></li>
+                        <li><a href="#">Seguros Empresariales</a></li>
+                        <li><a href="#">Seguros de Vida</a></li>
+                        <li><a href="#">Seguros de Salud</a></li>
+                        <li><a href="#">Seguros para PYMES</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Enlaces rapidos</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Preguntas frecuentes</a></li>
+                        <li><a href="#">Cotización online</a></li>
+                        <li><a href="#">Siniestros</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <p>Av. Frias 599</p>
+                    <p>Lomas De Zamora, Buenos Aires</p>
+                    <p><a href="https://wa.me/541178482784" target="_blank">Tel: +54 11 7848-2784</a></p>
+<p> </p>
+                    <p>Email: orgfriasseguros@fibertel.com.ar</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2003 Grupo Barros Productor de Seguros. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('nav ul');
+        
+        menuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('show');
+        });
+        
+        // Form Submission
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Here you would normally send the form data to your server
+            // For this example, we'll just show an alert
+            alert('Gracias por tu consulta. Nos pondremos en contacto contigo a la brevedad.');
+            
+            // Reset form
+            contactForm.reset();
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (navMenu.classList.contains('show')) {
+                        navMenu.classList.remove('show');
+                    }
+                }
+            });
+        });
+        
+        // Sticky header on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            header.classList.toggle('sticky', window.scrollY > 0);
+        });
+    </script>
+</body>
+</html>
